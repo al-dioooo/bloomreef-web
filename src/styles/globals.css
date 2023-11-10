@@ -1,27 +1,29 @@
+@import url("./fonts.css");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+/* Change highlight color */
+*::selection {
+    @apply bg-black text-white;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+/* Remove default scrollbar */
+
+html &:not(.dev) &,
+* {
+    scrollbar-width: none !important;
+    -ms-overflow-style: none !important;
+
+    &::-webkit-scrollbar {
+        width: 0 !important;
+        height: 0 !important;
+    }
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+html &:not(.dev) &,
+* &::-webkit-scrollbar {
+    width: 0 !important;
+    height: 0 !important;
 }

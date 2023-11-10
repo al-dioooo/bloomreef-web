@@ -1,0 +1,41 @@
+/* Poppins */
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap");
+
+/* Open Sans */
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;500;600;700&display=swap');
+
+/* Playfair Display */
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600;1,700&display=swap");
+
+/* Argesta Display */
+@font-face {
+    font-family: "Argesta Display";
+    src: url("/fonts/argesta-display-regular.otf");
+    format: "embedded-opentype";
+}
+
+/* Branch */
+@font-face {
+    font-family: "Branch";
+    src: url("/fonts/branch.otf");
+    format: "embedded-opentype";
+}
+
+/* Biotif (Trial) */
+@font-face {
+    font-family: "Biotif";
+    src: url("/fonts/biotif-regular.woff");
+    format: "woff";
+}
+
+@font-face {
+    font-family: "Biotif Light";
+    src: url("/fonts/biotif-light.woff");
+    format: "woff";
+}
+
+@font-face {
+    font-family: "Biotif Medium";
+    src: url("/fonts/biotif-medium.woff");
+    format: "woff";
+}
