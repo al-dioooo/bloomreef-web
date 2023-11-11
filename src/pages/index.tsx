@@ -43,8 +43,7 @@ export default function Landing() {
             {/* @ts-ignore */}
             <section ref={heroSectionContainer} className="relative h-screen px-16 pb-8 pt-32 flex flex-col w-full">
                 <div className="z-[1]">
-                    {/* <h1 className="text-4xl">Bloomreef</h1> */}
-                    <h1 className="text-7xl leading-normal italic font-display font-medium">
+                    <h1 className="text-6xl leading-normal italic font-display font-medium">
                         <motion.div style={{ y: useTransform(scrollYProgressOnHero, [0, 1], [0, height * .3]) }} className="z-[1] relative">An-incredible</motion.div>
                         <motion.div style={{ y: useTransform(scrollYProgressOnHero, [0, 1], [0, height * .25]) }}>
                             <span className="bg-white"><span className="text-red-500">—</span> Software House.</span>
