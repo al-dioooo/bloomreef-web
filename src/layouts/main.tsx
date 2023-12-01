@@ -5,6 +5,7 @@ import Footer from "@/components/layouts/footer"
 import { useEffect } from "react"
 import { Router } from "next/router"
 import { Scrollbar } from "@/components/scrollbar"
+import Cursor from "@/components/layouts/cursor"
 
 export default function MainLayout({ children }: { children: any }) {
     const lenis = useLenis()
@@ -27,6 +28,8 @@ export default function MainLayout({ children }: { children: any }) {
     return (
         <Lenis root>
             <main>
+                {/* Cursor */}
+                <Cursor />
                 <Scrollbar />
                 <Navbar />
                 {children}

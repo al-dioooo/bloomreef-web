@@ -1,16 +1,37 @@
+import AsteriskSpinner from "@/components/asterisk-spinner"
 import { CircleDecoration } from "@/components/graphics/decoration"
 import { ArrowNarrowDown, Asterisk } from "@/components/icons/outline"
+import RunningText from "@/components/running-text"
+import WorkItem from "@/components/work-item"
 import useDimension from "@/hooks/dimension"
 import { motion, useScroll, useTransform } from "framer-motion"
+import Head from "next/head"
 import { useRef } from "react"
 
-const whatWeDoItems = ["Digital Experience", "Business Strategy"]
+const whatWeDoItems = ["Mobile Applications", "Website Applications", "Smart Home & Automation", "IT Solution Consult", "IT Managed Services"]
+
+const latestWork = [
+    {
+        id: 1,
+        title: "Mie Ayam Abadi",
+        thumbnail: "/img/mie-ayam-abadi-cover-design.png"
+    },
+    {
+        id: 2,
+        title: "Kaca Film",
+        thumbnail: "/img/kaca-film-cover-design.png"
+    },
+    {
+        id: 3,
+        title: "Advan Retail Management",
+        thumbnail: "/img/arm-cover-design.png"
+    }
+]
 
 export default function Landing() {
     // Scroll container refs
     const heroSectionContainer = useRef()
     const workSectionContainer = useRef()
-    const runningSectionContainer = useRef()
 
     // Window dimension hooks
     const { height } = useDimension()
@@ -28,17 +49,11 @@ export default function Landing() {
         offset: ['start end', 'end start']
     })
 
-    const { scrollYProgress: scrollYProgressOnRunning } = useScroll({
-        // @ts-ignore
-        target: runningSectionContainer,
-        offset: ['start end', 'end start']
-    })
-
-    // Animation controls
-    
-
     return (
         <div>
+            <Head>
+                <title>An-incredible Software House — {process.env.appName}</title>
+            </Head>
             {/* Bloomreef, a digital-first website agency */}
             {/* @ts-ignore */}
             <section ref={heroSectionContainer} className="relative h-screen px-16 pb-8 pt-32 flex flex-col w-full">
@@ -50,7 +65,9 @@ export default function Landing() {
                         </motion.div>
                     </h1>
                     <motion.div style={{ y: useTransform(scrollYProgressOnHero, [0, 1], [0, height * .2]) }} className="max-w-md mt-16">
-                        <p className="leading-loose font-medium inline bg-white">Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam, corrupti consequuntur voluptatibus vero optio porro!</p>
+                        <p className="leading-loose font-medium inline bg-white">
+                            We are a company that focused on delivering an IT Solution for your business. Located at Bogor, Jawa Barat.
+                        </p>
                     </motion.div>
                 </div>
                 <div className="self-end -mt-72 w-2/3">
@@ -65,23 +82,11 @@ export default function Landing() {
                 </div>
             </section>
             {/* What we do ... */}
-            {/* @ts-ignore */}
-            <section ref={runningSectionContainer} className="py-8">
+            <div className="py-8 overflow-hidden">
                 {whatWeDoItems.map((row, index) => (
-                    <div key={index} className={`${index % 2 === 0 ? "justify-start" : "justify-end"} flex items-center space-x-4 overflow-hidden max-w-full`}>
-                        {[...Array(3)].map(() => (
-                            <motion.div key={index} style={{ x: useTransform(scrollYProgressOnRunning, [0, 1], [0, index % 2 === 0 ? (-height * .8) : height * .8]) }} className="flex-shrink-0">
-                                <p className="text-7xl mt-2 inline-flex items-center space-x-4">
-                                    <span className="rounded-full p-4 border-2">
-                                        <Asterisk className="w-12 h-12 text-red-500" strokeWidth={1.5} />
-                                    </span>
-                                    <span>{row}</span>
-                                </p>
-                            </motion.div>
-                        ))}
-                    </div>
+                    <RunningText key={index} baseVelocity={index % 2 === 0 ? -1 : 1}>{row}</RunningText>
                 ))}
-            </section>
+            </div>
             {/* Image separator */}
             {/* <section className="relative">
                 <div className="aspect-cinema overflow-hidden">
@@ -93,18 +98,13 @@ export default function Landing() {
             <section ref={workSectionContainer} className="py-8">
                 <span className="text-lg px-16 font-medium">Our latest work</span>
                 <div className="grid grid-cols-3 gap-8 px-16 py-8">
-                    {[...Array(3)].map((row, index) => (
-                        <motion.div key={index} style={{ y: useTransform(scrollYProgressOnWork, [0, 1], [0, (height * index) * .1]) }}>
-                            <div className="w-full aspect-video overflow-hidden">
-                                <img className="w-full" src="https://placehold.co/1600x900/EEE/31343C?font=playfair-display&text=Playfair%20Display" alt="" />
-                            </div>
-                            <p className="font-medium text-lg mt-2">Project Title</p>
-                        </motion.div>
+                    {latestWork.map((row, index) => (
+                        <WorkItem data={row} scrollProgress={scrollYProgressOnWork} key={index} index={index} />
                     ))}
                 </div>
                 {/* Just decoration */}
                 <div className="mt-32 mb-8 flex items-center justify-center relative">
-                    <motion.span style={{ rotate: useTransform(scrollYProgressOnWork, [0, 1], [0, height * .8]) }}><Asterisk className="w-6 h-6" strokeWidth={1.5} /></motion.span>
+                    <AsteriskSpinner strokeWidth={1.5} baseVelocity={8} />
                     <span className="absolute z-[1] inset-0 flex justify-center items-center"><CircleDecoration className="scale-110 text-red-500 -rotate-[9deg]" strokeWidth={2} /> </span>
                 </div>
             </section>
@@ -128,7 +128,8 @@ export default function Landing() {
                         <div className="text-5xl font-semibold font-display italic">we pursue to infinity.</div>
                     </h4>
                     <p className="leading-loose font-medium">
-                        <span className="text-red-500">—</span> Lorem ipsum dolor sit amet consectetur adipisicing elit. Eum officiis, voluptate laboriosam enim architecto adipisci cupiditate. Reiciendis ipsam pariatur natus rem, voluptates, voluptate aut ducimus sint consectetur suscipit eius atque.
+                        <span className="text-red-500">—</span> We are a company that focused on delivering an IT Solutions to a business so The Business can focus on creating new business opportunity.
+                        Our development center located at Bogor, Jawa Barat with an outstanding team in IT Development Area.
                     </p>
                 </div>
             </section>

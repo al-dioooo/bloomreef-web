@@ -1,51 +1,23 @@
+import AsteriskSpinner from "@/components/asterisk-spinner"
 import Input from "@/components/forms/input"
 import { CircleDecoration } from "@/components/graphics/decoration"
 import { ArrowNarrowRight, ArrowUpRight, Asterisk, Mail, WhatsApp } from "@/components/icons/outline"
 import useDimension from "@/hooks/dimension"
 import axios from "axios"
 import { motion, useScroll, useTransform } from "framer-motion"
+import Head from "next/head"
 import { useRef, useState } from "react"
 
 const contacts = [
     {
         label: "Email",
-        value: "hello@bloomreef.id",
-        url: "mailto:hello@bloomreef.id"
-    },
-    {
-        label: "Email",
-        value: "hello@bloomreef.id",
-        url: "mailto:hello@bloomreef.id"
-    },
-    {
-        label: "Email",
-        value: "hello@bloomreef.id",
-        url: "mailto:hello@bloomreef.id"
+        value: "hello@guguskarangmekar.com",
+        url: "mailto:hello@guguskarangmekar.com"
     },
     {
         label: "WhatsApp",
         value: "+62 851-7307-5151",
         url: "https://wa.me/6285173075151"
-    },
-    {
-        label: "WhatsApp",
-        value: "+62 851-7307-5151",
-        url: "https://wa.me/6285173075151"
-    },
-    {
-        label: "WhatsApp",
-        value: "+62 851-7307-5151",
-        url: "https://wa.me/6285173075151"
-    },
-    {
-        label: "Instagram",
-        value: "@al.dioooo",
-        url: "https://instagram.com/al.dioooo"
-    },
-    {
-        label: "Instagram",
-        value: "@al.dioooo",
-        url: "https://instagram.com/al.dioooo"
     },
     {
         label: "Instagram",
@@ -59,29 +31,19 @@ export default function Contact() {
     const [email, setEmail] = useState("hello@alice.evr")
     const [message, setMessage] = useState("I want to ...")
 
-    // Scroll container refs
-    const justDecorationSectionContainer = useRef()
-
-    // Window dimension hooks
-    const { height } = useDimension()
-
-    // Scroll Listeners
-    const { scrollYProgress: scrollYProgressOnJustDecoration } = useScroll({
-        // @ts-ignore
-        target: justDecorationSectionContainer,
-        offset: ['start end', 'end start']
-    })
-
     function submitHandler() {
-        axios.post(`http://the-web-api.test/quick-word`, {
+        axios.post(`http://the-backend.test/message`, {
             name,
             email,
             message
-        }).then((res) => res).catch((error) => error)
+        }).then((res) => res).catch((error) => console.log(error))
     }
 
     return (
-        <div className="">
+        <div>
+            <Head>
+                <title>Contact — {process.env.appName}</title>
+            </Head>
             {/* Say hi! */}
             <section className="pb-16 pt-32 px-16 relative flex justify-between">
                 <div className="space-y-12">
@@ -95,7 +57,7 @@ export default function Contact() {
                 </div>
                 <div className="flex flex-col divide-y w-full max-w-3xl border-y h-fit">
                     {contacts.map((row, index) => (
-                        <motion.a href={row.url} target="_blank" transition={{ type: "spring", damping: 20 }} initial={{ paddingLeft: 0, paddingRight: 0, paddingTop: '1rem', paddingBottom: '1rem' }} whileHover={{ paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '1rem', paddingBottom: '1rem' }} className="group text-xl transition flex items-center justify-between">
+                        <motion.a key={index} href={row.url} target="_blank" transition={{ type: "spring", damping: 20 }} initial={{ paddingLeft: 0, paddingRight: 0, paddingTop: '1rem', paddingBottom: '1rem' }} whileHover={{ paddingLeft: '1rem', paddingRight: '1rem', paddingTop: '1rem', paddingBottom: '1rem' }} className="group text-xl transition flex items-center justify-between">
                             <div className="font-medium inline-flex space-x-4 items-center">
                                 <span>{row.label}</span>
                                 <span className="opacity-0 translate-y-1 group-hover:opacity-100 group-hover:translate-y-0 transition">
@@ -108,9 +70,8 @@ export default function Contact() {
                 </div>
             </section>
             {/* Just decoration */}
-            {/* @ts-ignore */}
-            <section ref={justDecorationSectionContainer} className="flex items-center justify-center relative">
-                <motion.span style={{ rotate: useTransform(scrollYProgressOnJustDecoration, [0, 1], [0, height * .8]) }}><Asterisk className="w-6 h-6" strokeWidth={1.5} /></motion.span>
+            <section className="flex items-center justify-center relative">
+                <AsteriskSpinner strokeWidth={1.5} baseVelocity={8} />
                 <span className="absolute z-[1] inset-0 flex justify-center items-center"><CircleDecoration className="scale-110 text-red-500 -rotate-[9deg]" strokeWidth={2} /> </span>
             </section>
             {/* Send message */}

@@ -1,6 +1,7 @@
 import NavLink from "@/components/nav-link"
 import Logo from "@/components/graphics/logo"
 import Link from "next/link"
+import CTA from "@/components/cta"
 
 export default function Navbar() {
     return (
@@ -19,9 +20,7 @@ export default function Navbar() {
                     </ul>
                 </div>
                 {/* CTA */}
-                <Link href="/contact" className="px-12 py-2 rounded-full border-2 hover:border-black hover:bg-red-500 hover:text-white transition inline-flex items-center space-x-4 font-semibold">
-                    <span>Let&apos;s Talk</span>
-                </Link>
+                <CTA />
             </div>
         </nav>
     )

@@ -1,11 +1,33 @@
 import { CircleDecoration } from "@/components/graphics/decoration"
+import TeamList from "@/components/team-list"
 import useDimension from "@/hooks/dimension"
-import { motion, useScroll, useTransform } from "framer-motion"
+import { AnimatePresence, motion, useScroll, useTransform } from "framer-motion"
+import Head from "next/head"
 import { useRef } from "react"
+
+const teams = [
+    {
+        name: "Aldio Lisafron",
+        img: "/img/memoji/aldio.png",
+        position: "Developer"
+    },
+    {
+        name: "Muhammad Rifky Afrizal",
+        img: "/img/memoji/rifky.png",
+        position: "QA Tester"
+    },
+    {
+        name: "Nuh Risaldi Suherman",
+        img: "/img/memoji/risaldi.png",
+        position: "QA Tester"
+    }
+]
 
 export default function Company() {
     // Scroll container refs
     const imageSectionContainer = useRef()
+
+    const teamListContainer = useRef()
 
     // Window dimension hooks
     const { height } = useDimension()
@@ -18,11 +40,14 @@ export default function Company() {
     })
 
     return (
-        <div className="">
+        <div>
+            <Head>
+                <title>Company — {process.env.appName}</title>
+            </Head>
             <section className="pb-16 pt-32 px-16 relative flex justify-between">
                 <div className="space-y-12">
                     <h4 className="leading-normal">
-                        <div className="text-3xl font-medium">We are,</div>
+                        <div className="text-3xl font-medium">We are</div>
                         <div className="text-5xl font-semibold font-display italic">Bloomreef</div>
                     </h4>
                     <p className="leading-loose font-medium max-w-md">
@@ -42,21 +67,26 @@ export default function Company() {
             </section> */}
             {/* Teams, grid */}
             {/* @ts-ignore */}
-            <section className="py-8 text-center space-y-8">
+            {/* <section className="py-8 text-center space-y-8">
                 <div className="flex items-center justify-center relative">
                     <span className="text-lg px-16 font-medium">Teams</span>
                     <span className="absolute z-[1] inset-0 flex justify-center items-center"><CircleDecoration className="scale-110 text-red-500 -rotate-[9deg]" strokeWidth={2} /> </span>
                 </div>
                 <div className="flex space-x-16 justify-center">
-                    {[...Array(3)].map((row, index) => (
+                    {teams.map((row, index) => (
                         <motion.div key={index}>
-                            <div className="aspect-square overflow-hidden rounded-full w-48">
-                                <img className="w-full aspect-square rounded-full object-cover" src="https://placehold.co/400x400/EEE/31343C?font=playfair-display&text=400x400" alt="" />
+                            <div className="aspect-square overflow-hidden rounded-full w-48 bg-neutral-100">
+                                <img className="w-full aspect-square rounded-full object-cover" src={row.img} alt="" />
                             </div>
-                            <p className="font-medium text-lg mt-2">Name</p>
+                            <p className="font-medium text-lg mt-2">{row.name}</p>
+                            <p className="font-medium text-sm text-neutral-500">{row.position}</p>
                         </motion.div>
                     ))}
                 </div>
+            </section> */}
+            <section className="py-8 px-16">
+                {/* @ts-ignore */}
+                <TeamList items={teams} />
             </section>
         </div>
     )

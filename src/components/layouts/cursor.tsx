@@ -6,14 +6,16 @@ export default function Cursor() {
     const mouse = {
         x: useMotionValue(0),
         y: useMotionValue(0),
-        scale: useMotionValue(0)
+
+        opacity: useMotionValue(0)
     }
 
     const smoothOptions = { damping: 20 }
     const smoothMouse = {
         x: useSpring(mouse.x, smoothOptions),
         y: useSpring(mouse.y, smoothOptions),
-        scale: useSpring(mouse.scale, smoothOptions)
+
+        opacity: useSpring(mouse.opacity, smoothOptions)
     }
 
     const manageMouseMove = (e: MouseEvent) => {
@@ -22,22 +24,35 @@ export default function Cursor() {
         mouse.y.set(clientY - cursorSize / 2)
     }
 
+    const manageMouseEnter = () => {
+        mouse.opacity.set(1)
+    }
+
+    const manageMouseLeave = () => {
+        mouse.opacity.set(0)
+    }
+
     useEffect(() => {
         window.addEventListener("mousemove", manageMouseMove)
+        window.addEventListener("mouseover", manageMouseEnter)
+        window.addEventListener("mouseout", manageMouseLeave)
         return () => {
             window.removeEventListener("mousemove", manageMouseMove)
+            window.removeEventListener("mouseover", manageMouseEnter)
+            window.removeEventListener("mouseout", manageMouseLeave)
         }
     }, [])
 
     return (
-        <motion.div
-            style={{
-                left: smoothMouse.x,
-                top: smoothMouse.y,
-            }}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            className="absolute w-12 h-12 bg-white bg-opacity-5 border-2 border-white border-opacity-75 rounded-full pointer-events-none">
-        </motion.div>
+        <div className="fixed top-0 left-0 z-[100] mix-blend-difference">
+            <motion.div
+                style={{
+                    left: smoothMouse.x,
+                    top: smoothMouse.y,
+                    opacity: smoothMouse.opacity
+                }}
+                className="absolute w-12 h-12 bg-white bg-opacity-5 border-2 border-white border-opacity-75 rounded-full pointer-events-none">
+            </motion.div>
+        </div>
     )
 }

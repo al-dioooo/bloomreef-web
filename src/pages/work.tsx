@@ -2,6 +2,7 @@ import { CircleDecoration } from "@/components/graphics/decoration"
 import { Asterisk } from "@/components/icons/outline"
 import useDimension from "@/hooks/dimension"
 import { motion, useScroll, useTransform } from "framer-motion"
+import Head from "next/head"
 import { useRef } from "react"
 
 export default function Work() {
@@ -18,7 +19,10 @@ export default function Work() {
     })
 
     return (
-        <div className="">
+        <div>
+            <Head>
+                <title>Work — {process.env.appName}</title>
+            </Head>
             {/* @ts-ignore */}
             <section ref={workSectionContainer} className="pt-32">
                 {/* <span className="text-lg px-16 font-medium">Our latest work</span> */}
