@@ -25,7 +25,7 @@ export default function TeamList({ items }: { items: any }) {
                     <span className="font-semibold">{row.position}</span>
                     <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
                         <AnimatePresence mode="wait">
-                            {show === index && (
+                            {(show === index) && (row.img) && (
                                 <div className="relative z-10">
                                     <motion.img variants={imageVariants} initial="initial" animate="animate" exit="exit" transition={{ type: "spring", damping: 20, stiffness: 200 }} className="w-36 h-36 aspect-square object-cover z-20 relative" src={row.img} alt={`${row.name}'s Potrait`} />
                                     <motion.div style={{ WebkitMaskImage: `url("${row.img}")`, WebkitMaskRepeat: "no-repeat", WebkitMaskPosition: "top", WebkitMaskSize: "9rem" }} variants={imageVariants} initial="initial" animate="animate" exit="exit" transition={{ type: "spring", damping: 20, stiffness: 300 }} className="w-36 h-36 bg-black z-10 absolute inset-0" />

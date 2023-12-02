@@ -1,45 +1,68 @@
-import { CircleDecoration } from "@/components/graphics/decoration"
-import { Asterisk } from "@/components/icons/outline"
-import useDimension from "@/hooks/dimension"
-import { motion, useScroll, useTransform } from "framer-motion"
+import { motion } from "framer-motion"
 import Head from "next/head"
-import { useRef } from "react"
+import Link from "next/link"
+
+const workData = [
+    {
+        id: 1,
+        title: "Mie Ayam Abadi",
+        thumbnail: "/img/mie-ayam-abadi-cover-design.png",
+        slug: "mie-ayam-abadi"
+    },
+    {
+        id: 2,
+        title: "Kaca Film",
+        thumbnail: "/img/kaca-film-cover-design.png",
+        slug: "kaca-film"
+    },
+    {
+        id: 3,
+        title: "Advan Retail Management",
+        thumbnail: "/img/arm-cover-design.png",
+        slug: "advan-retail-management"
+    }
+]
+
+const linkVariant = {
+    initial: { opacity: 0, y: 50 },
+    show: (index: number) => ({ opacity: 1, y: 0, transition: { type: "spring", delay: .1 * index } })
+}
+
+const imageVariant = {
+    hover: {
+        scale: 1.1
+    }
+}
+
+const titleVariant = {
+    hover: {
+        y: -40
+    }
+}
+
+const springTransition = {
+    type: "spring"
+}
+
+const MotionLink = motion(Link)
 
 export default function Work() {
-    // Scroll container refs
-    const workSectionContainer = useRef()
-
-    // Window dimension hooks
-    const { height } = useDimension()
-
-    const { scrollYProgress: scrollYProgressOnWork } = useScroll({
-        // @ts-ignore
-        target: workSectionContainer,
-        offset: ['start start', 'end start']
-    })
-
     return (
         <div>
             <Head>
-                <title>Work — {process.env.appName}</title>
+                <title>Work — {process.env.APP_NAME}</title>
             </Head>
-            {/* @ts-ignore */}
-            <section ref={workSectionContainer} className="pt-32">
-                {/* <span className="text-lg px-16 font-medium">Our latest work</span> */}
-                <motion.div transition={{ staggerChildren: 1 }} className="grid grid-cols-3 gap-8 px-16 py-8">
-                    {[...Array(6)].map((row, index) => (
-                        <motion.div key={index} initial={{ opacity: 0, y: 4 }} whileInView={{ opacity: 1, y: 0 }} transition={{ type: "spring", damping: 20 }}>
-                            <div className="w-full aspect-video overflow-hidden">
-                                <img className="w-full" src="https://placehold.co/1600x900/EEE/31343C?font=playfair-display&text=Playfair%20Display" alt="" />
-                            </div>
-                            <p className="font-medium text-lg mt-2">Project Title</p>
-                        </motion.div>
+            <section className="pt-32">
+                <span className="text-lg px-16 font-medium">All Projects</span>
+                <div className="grid grid-cols-3 gap-8 px-16 py-8">
+                    {workData.map((row, index: number) => (
+                        <MotionLink href={`/work/${row.slug}`} key={index} initial="initial" whileInView="show" whileHover="hover" viewport={{ once: true }} variants={linkVariant} custom={index} transition={{ type: "spring", damping: 20 }}>
+                            <motion.div transition={springTransition} variants={imageVariant} className="w-full aspect-video overflow-hidden bg-neutral-200 border-2 border-black">
+                                <img className="w-full object-cover aspect-video" src={row.thumbnail} alt={`${row.title} Thumbnail`} />
+                            </motion.div>
+                            <motion.p variants={titleVariant} transition={springTransition} className="font-medium text-lg mt-2">{row.title}</motion.p>
+                        </MotionLink>
                     ))}
-                </motion.div>
-                {/* Just decoration */}
-                <div className="mb-8 flex items-center justify-center relative">
-                    <motion.span style={{ rotate: useTransform(scrollYProgressOnWork, [0, 1], [0, height * .8]) }}><Asterisk className="w-6 h-6" strokeWidth={1.5} /></motion.span>
-                    <span className="absolute z-[1] inset-0 flex justify-center items-center"><CircleDecoration className="scale-110 text-red-500 -rotate-[9deg]" strokeWidth={2} /> </span>
                 </div>
             </section>
         </div>

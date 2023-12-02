@@ -1,12 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-    // output: "export",
-    // basePath: "/profile",
-    // trailingSlash: true,
-    // assetPrefix: "/profile",
+    output: "export",
+    trailingSlash: true,
     reactStrictMode: true,
     env: {
-        appName: "Bloomreef"
+        APP_NAME: process.env.APP_NAME,
+        THE_BACKEND_API_URL: process.env.THE_BACKEND_API_URL
     }
 }
 

@@ -14,17 +14,20 @@ const latestWork = [
     {
         id: 1,
         title: "Mie Ayam Abadi",
-        thumbnail: "/img/mie-ayam-abadi-cover-design.png"
+        thumbnail: "/img/mie-ayam-abadi-cover-design.png",
+        slug: "mie-ayam-abadi"
     },
     {
         id: 2,
         title: "Kaca Film",
-        thumbnail: "/img/kaca-film-cover-design.png"
+        thumbnail: "/img/kaca-film-cover-design.png",
+        slug: "kaca-film"
     },
     {
         id: 3,
         title: "Advan Retail Management",
-        thumbnail: "/img/arm-cover-design.png"
+        thumbnail: "/img/arm-cover-design.png",
+        slug: "advan-retail-management"
     }
 ]
 
@@ -52,7 +55,7 @@ export default function Landing() {
     return (
         <div>
             <Head>
-                <title>An-incredible Software House — {process.env.appName}</title>
+                <title>An-incredible Software House — {process.env.APP_NAME}</title>
             </Head>
             {/* Bloomreef, a digital-first website agency */}
             {/* @ts-ignore */}

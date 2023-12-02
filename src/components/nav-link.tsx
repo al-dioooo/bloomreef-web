@@ -14,7 +14,7 @@ export default function NavLink({ href, label, active }: { href: string, label: 
             <MotionLink initial={{ y: -100 }} animate={{ y: 0 }} href={href} className="px-6 py-2 relative hover:text-red-500">
                 <span className={`${pathname === active ? "z-[2] relative" : ""} transition font-semibold`}>{label}</span>
                 <AnimatePresence mode="wait">
-                    {pathname === active && (
+                    {pathname == active && (
                         <motion.span transition={{ type: "spring", damping: 20 }} className="absolute z-[1] inset-0 flex justify-center items-center"><CircleDecoration className="scale-110 -rotate-6 text-red-500" strokeWidth={2} delay={1} /> </motion.span>
                     )}
                 </AnimatePresence>

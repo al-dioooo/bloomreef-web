@@ -15,8 +15,8 @@ export default function Navbar() {
                 <div className="absolute inset-0 pointer-events-none flex justify-center">
                     <ul className="flex items-center pointer-events-auto p-1">
                         <NavLink href="/" active="/" label="Home" />
-                        <NavLink href="/work" active="/work" label="Work" />
-                        <NavLink href="/company" active="/company" label="Company" />
+                        <NavLink href="/work" active="/work/" label="Work" />
+                        <NavLink href="/company" active="/company/" label="Company" />
                     </ul>
                 </div>
                 {/* CTA */}

@@ -1,5 +1,7 @@
 import AsteriskSpinner from "@/components/asterisk-spinner"
+import Description from "@/components/forms/description"
 import Input from "@/components/forms/input"
+import Textarea from "@/components/forms/textarea"
 import { CircleDecoration } from "@/components/graphics/decoration"
 import { ArrowNarrowRight, ArrowUpRight, Asterisk, Mail, WhatsApp } from "@/components/icons/outline"
 import useDimension from "@/hooks/dimension"
@@ -27,25 +29,37 @@ const contacts = [
 ]
 
 export default function Contact() {
-    const [name, setName] = useState("Alice")
-    const [email, setEmail] = useState("hello@alice.evr")
-    const [message, setMessage] = useState("I want to ...")
+    const [alreadySubmit, setAlreadySubmit] = useState(false)
+
+    const [name, setName] = useState()
+    const [email, setEmail] = useState()
+    const [message, setMessage] = useState()
+
+    const [errors, setErrors] = useState<any>({})
 
     function submitHandler() {
-        axios.post(`http://the-backend.test/message`, {
+        axios.post(`${process.env.THE_BACKEND_API_URL}/message`, {
             name,
             email,
             message
-        }).then((res) => res).catch((error) => console.log(error))
+        }).then((res) => {
+            setAlreadySubmit(true)
+        }).catch((error) => {
+            if (error.response.status === 422) {
+                setErrors(error.response.data.errors)
+            }
+
+            console.log(error.response)
+        })
     }
 
     return (
         <div>
             <Head>
-                <title>Contact — {process.env.appName}</title>
+                <title>Contact — {process.env.APP_NAME}</title>
             </Head>
             {/* Say hi! */}
-            <section className="pb-16 pt-32 px-16 relative flex justify-between">
+            {/* <section className="pb-16 pt-32 px-16 relative flex justify-between">
                 <div className="space-y-12">
                     <h4 className="leading-normal">
                         <div className="text-3xl font-medium">Don&apos;t be shy,</div>
@@ -68,14 +82,14 @@ export default function Contact() {
                         </motion.a>
                     ))}
                 </div>
-            </section>
+            </section> */}
             {/* Just decoration */}
-            <section className="flex items-center justify-center relative">
+            {/* <section className="flex items-center justify-center relative">
                 <AsteriskSpinner strokeWidth={1.5} baseVelocity={8} />
                 <span className="absolute z-[1] inset-0 flex justify-center items-center"><CircleDecoration className="scale-110 text-red-500 -rotate-[9deg]" strokeWidth={2} /> </span>
-            </section>
+            </section> */}
             {/* Send message */}
-            <section className="p-16 space-y-4">
+            {/* <section className="px-16 pb-16 pt-32 space-y-4">
                 <span className="text-lg font-medium">Drop a quick word</span>
                 <div className="text-4xl font-medium leading-loose">
                     <div className="flex flex-wrap">
@@ -94,6 +108,37 @@ export default function Contact() {
                         </button>
                     </div>
                 </div>
+            </section> */}
+            <section className="px-16 pb-16 pt-32 space-y-4">
+                {alreadySubmit ? (
+                    <h4 className="leading-normal">
+                        <div className="text-3xl font-medium">Thank You</div>
+                        <div className="text-5xl font-semibold font-display italic">for submitting!<span className="text-red-500">~</span></div>
+                    </h4>
+                ) : (
+                    <>
+                        <span className="text-lg font-medium">Drop a quick word</span>
+                        <div className="space-y-4 max-w-xl w-full text-xl">
+                            <div>
+                                <Input onChange={(e: any) => setName(e.target.value)} id="name" placeholder="Name" error={errors.name} />
+                                <Description error={errors.name} />
+                            </div>
+                            <div>
+                                <Input onChange={(e: any) => setEmail(e.target.value)} id="email" placeholder="Email" error={errors.email} />
+                                <Description error={errors.email} />
+                            </div>
+                            <div>
+                                <Textarea onChange={(e: any) => setMessage(e.target.value)} id="message" placeholder="Message" error={errors.message} />
+                                <Description error={errors.message} />
+                            </div>
+                        </div>
+                        <div className="w-fit mt-4">
+                            <button onClick={submitHandler} className="rounded-full border-2 p-2 hover:bg-red-500 hover:border-black hover:text-white transition">
+                                <ArrowNarrowRight className="w-12 h-12" />
+                            </button>
+                        </div>
+                    </>
+                )}
             </section>
         </div>
     )

@@ -7,8 +7,13 @@ import { useRef } from "react"
 
 const teams = [
     {
-        name: "Aldio Lisafron",
-        img: "/img/memoji/aldio.png",
+        name: "R. Usman Hasan Saputra",
+        // img: "/img/memoji/aldio.png",
+        position: "Developer"
+    },
+    {
+        name: "Muhammad Naufal Musyaffa",
+        // img: "/img/memoji/risaldi.png",
         position: "Developer"
     },
     {
@@ -20,6 +25,11 @@ const teams = [
         name: "Nuh Risaldi Suherman",
         img: "/img/memoji/risaldi.png",
         position: "QA Tester"
+    },
+    {
+        name: "Aldio Lisafron",
+        img: "/img/memoji/aldio.png",
+        position: "Developer"
     }
 ]
 
@@ -42,7 +52,7 @@ export default function Company() {
     return (
         <div>
             <Head>
-                <title>Company — {process.env.appName}</title>
+                <title>Company — {process.env.APP_NAME}</title>
             </Head>
             <section className="pb-16 pt-32 px-16 relative flex justify-between">
                 <div className="space-y-12">

@@ -30,6 +30,17 @@ export const ArrowNarrowDown = ({ className, strokeWidth }: { className?: string
     )
 }
 
+export const ArrowNarrowLeft = ({ className, strokeWidth }: { className?: string, strokeWidth?: number }) => {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" className={className} width={24} height={24} viewBox="0 0 24 24" strokeWidth={strokeWidth} stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M5 12l14 0" />
+            <path d="M5 12l4 4" />
+            <path d="M5 12l4 -4" />
+        </svg>
+    )
+}
+
 export const ArrowNarrowRight = ({ className, strokeWidth }: { className?: string, strokeWidth?: number }) => {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" className={className} width={24} height={24} viewBox="0 0 24 24" strokeWidth={strokeWidth ?? 1} stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
@@ -75,12 +86,23 @@ export const Mail = ({ className, strokeWidth }: { className?: string, strokeWid
     )
 }
 
-export const WhatsApp = ({ className = "", strokeWidth = 1.5 }: { className: string, strokeWidth: number }) => {
+export const WhatsApp = ({ className = "", strokeWidth = 1.5 }: { className?: string, strokeWidth?: number }) => {
     return (
         <svg xmlns="http://www.w3.org/2000/svg" className={className} width={24} height={24} viewBox="0 0 24 24" strokeWidth={strokeWidth} stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
             <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
             <path d="M3 21l1.65 -3.8a9 9 0 1 1 3.4 2.9l-5.05 .9"></path>
             <path d="M9 10a.5 .5 0 0 0 1 0v-1a.5 .5 0 0 0 -1 0v1a5 5 0 0 0 5 5h1a.5 .5 0 0 0 0 -1h-1a.5 .5 0 0 0 0 1"></path>
+        </svg>
+    )
+}
+
+export const Link = ({ className = "", strokeWidth = 1.5 }: { className?: string, strokeWidth?: number }) => {
+    return (
+        <svg xmlns="http://www.w3.org/2000/svg" className={className} width={24} height={24} viewBox="0 0 24 24" strokeWidth={strokeWidth} stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round">
+            <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+            <path d="M9 15l6 -6" />
+            <path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464" />
+            <path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463" />
         </svg>
     )
 }
