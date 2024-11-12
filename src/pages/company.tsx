@@ -8,12 +8,12 @@ import { useRef } from "react"
 const teams = [
     {
         name: "R. Usman Hasan Saputra",
-        // img: "/img/memoji/aldio.png",
+        img: "/img/memoji/usman.png",
         position: "Developer"
     },
     {
         name: "Muhammad Naufal Musyaffa",
-        // img: "/img/memoji/risaldi.png",
+        img: "/img/memoji/naufal.png",
         position: "Developer"
     },
     {

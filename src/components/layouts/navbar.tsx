@@ -8,8 +8,8 @@ export default function Navbar() {
         <nav className="fixed top-0 left-0 w-full z-50">
             <div className="relative flex items-center justify-between px-16 py-8 text-sm">
                 {/* Logo */}
-                <Link href="/" className="p-2 rounded-full border-2 hover:border-black transition">
-                    <Logo className="w-6 h-6 text-red-500" strokeWidth={4} />
+                <Link href="/" className="p-1 rounded-full border-2 hover:border-black transition">
+                    <Logo className="w-8 h-8 text-red-500" />
                 </Link>
                 {/* Links */}
                 <div className="absolute inset-0 pointer-events-none flex justify-center">
